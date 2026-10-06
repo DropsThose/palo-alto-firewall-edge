@@ -1,5 +1,5 @@
 ## Incident
-![[Discord-tcp-rst.png]]
+<img src="/assets/Discord-tcp-rst.png" />
 My sister told me that when she tried to join a discord voice call on her computer the call would fail to connect stating "disconnected" and discord displayed an error code "2007" which according to discord (https://support.discord.com/hc/en-us/articles/30952914470807-Discord-Audio-and-Video-Error-Codes-Troubleshooting-Guide) correlates to network issues. 
 ## Troubleshooting Steps
 I went over to my sister's computer to investigate and I recreated the issue by attempting to join a voice call, confirming that the issue was indeed present. 
@@ -12,10 +12,10 @@ I attempted to remove the spg from the security policy my sister's traffic was m
 
 ## Root Cause
 App-ID was identifying one of the Discord app dependencies, SSL, on non-standard ports which fell outside of what was within the "application-default" service profile, causing certain ports to not match my "home-to-untrusted" security policy when I had the "application-default" service profile enabled and instead fall through to my clean-up policy, "interzone-default" which blocks all traffic that it matches. 
-![[Discord non-standard ssl.png]]
+<img src="/assets/Discord non-standard ssl.png" />
 Non-standard ports identified as SSL app: 8443, 2083, 2087, 2096, etc. 
 ## Fix
-![[PA Discord policy.png]]
+<img src="/assets/PA Discord policy.png" />
 I made a policy allowing Discord and its dependencies and set service to any to catch all of the non-standard ports. This allows app level control but not port level control which seems to be as granular as you can get without playing whack-a-mole by trying to restrict Discord and its dependencies to certain custom services. 
 
 ## Other thoughts
