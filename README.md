@@ -48,4 +48,4 @@ To be continued...
 
 ## Incidents
 
-- [Discord voice calls stuck on 'Disconnected'](Incidents/Discord voice calls stuck on 'Disconnected'.md)
+- [Discord voice calls stuck on 'Disconnected'](Incidents/discord-voice-calls-stuck-on-disconnected.md)
